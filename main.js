@@ -12,11 +12,15 @@
 // console.log(headerTitle)
 
 
-var listItem = document.getElementsByClassName('list-group-item')
-console.log(listItem)
-listItem[2].style.backgroundColor='green'
-listItem[1].textContent="Hello"
+// var listItem = document.getElementsByClassName('list-group-item')
+// console.log(listItem)
+// listItem[2].style.backgroundColor='green'
+// listItem[1].textContent="Hello"
 
-for(let i=0;i<listItem.length;i++){
-    listItem[i].style.fontWeight='bold'
-}
+// for(let i=0;i<listItem.length;i++){
+//     listItem[i].style.fontWeight='bold'
+// }
+
+var li = document.getElementsByTagName('li')
+li[1].textContent="Hello Boss"
+li[3].style.backgroundColor='yellow'

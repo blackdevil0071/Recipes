@@ -12,15 +12,24 @@
 // console.log(headerTitle)
 
 
-// var listItem = document.getElementsByClassName('list-group-item')
-// console.log(listItem)
-// listItem[2].style.backgroundColor='green'
-// listItem[1].textContent="Hello"
+var listItem = document.getElementsByClassName('list-group-item')
+console.log(listItem)
+listItem[2].style.backgroundColor='green'
+listItem[1].textContent="Hello"
 
-// for(let i=0;i<listItem.length;i++){
-//     listItem[i].style.fontWeight='bold'
-// }
+for(let i=0;i<listItem.length;i++){
+    listItem[i].style.fontWeight='bold'
+}
 
-var li = document.getElementsByTagName('li')
-li[1].textContent="Hello Boss"
-li[3].style.backgroundColor='yellow'
+
+
+//QUERY SELECTOR
+
+var querySelector = document.querySelectorAll('.list-group-item')
+querySelector[1].style.backgroundColor = 'green'
+
+
+var odd = document.querySelectorAll('li:nth-child(odd)')
+for(let i=0;i<odd.length;i++){
+    odd[i].style.backgroundColor='red'
+}

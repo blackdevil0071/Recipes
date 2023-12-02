@@ -11,8 +11,12 @@
 // console.log(headerTitle.innerHTML = "Hello World")
 // console.log(headerTitle)
 
-var header = document.getElementById('main-header')
-header.style.border = 'solid 10px black'
 
-var title = document.getElementById('main-title')
-title.fontWeight='bold';
+var listItem = document.getElementsByClassName('list-group-item')
+console.log(listItem)
+listItem[2].style.backgroundColor='green'
+listItem[1].textContent="Hello"
+
+for(let i=0;i<listItem.length;i++){
+    listItem[i].style.fontWeight='bold'
+}

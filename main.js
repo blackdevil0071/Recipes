@@ -6,6 +6,16 @@ const userList = document.querySelector('#users');
 
 myForm.addEventListener('submit', onSubmit);
 
+// Load user data from local storage and update UI
+document.addEventListener('DOMContentLoaded', () => {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    users.forEach(user => {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${user.name}: ${user.email}`));
+        userList.appendChild(li);
+    });
+});
+
 function onSubmit(e) {
     e.preventDefault();
 

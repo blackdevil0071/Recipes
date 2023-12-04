@@ -10,9 +10,7 @@ myForm.addEventListener('submit', onSubmit);
 document.addEventListener('DOMContentLoaded', () => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     users.forEach(user => {
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${user.name}: ${user.email}`));
-        userList.appendChild(li);
+        addUserToUI(user);
     });
 });
 
@@ -39,13 +37,43 @@ function onSubmit(e) {
         // Update local storage with the new array of users
         localStorage.setItem('users', JSON.stringify(users));
 
-        // Update the UI with the new user details
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${newUser.name}: ${newUser.email}`));
-        userList.appendChild(li);
+        // Update the UI with the new user details and delete button
+        addUserToUI(newUser);
 
         // Clear input fields
         name.value = '';
         email.value = '';
     }
 }
+
+function addUserToUI(user) {
+    const li = document.createElement('li');
+    li.appendChild(document.createTextNode(`${user.name}: ${user.email}`));
+
+    // Add delete button
+    const btn = document.createElement('button');
+    btn.appendChild(document.createTextNode('Delete'));
+    btn.addEventListener('click', () => deleteUser(user));
+    li.appendChild(btn);
+
+    userList.appendChild(li);
+}
+
+function deleteUser(userToDelete) {
+    // Remove the user from the UI
+    const userListItems = document.querySelectorAll('#users li');
+    userListItems.forEach(li => {
+        const textContent = li.textContent || li.innerText;
+        if (textContent.includes(`${userToDelete.name}: ${userToDelete.email}`)) {
+            li.remove();
+        }
+    });
+
+    // Remove the user from local storage
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const updatedUsers = users.filter(user => (
+        user.name !== userToDelete.name || user.email !== userToDelete.email
+    ));
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+}
+

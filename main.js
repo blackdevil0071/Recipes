@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 myForm.addEventListener("submit", onSubmit);
 
+//GET METHOD
 function fetchUsersFromAPI() {
   axios
     .get(

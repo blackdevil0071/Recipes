@@ -92,5 +92,45 @@ function deleteUser(_id) {
         });
 }
 
+function editUser(userToEdit) {
+    name.value = userToEdit.name;
+    email.value = userToEdit.email;
+    myForm.setAttribute('data-edit-id', userToEdit._id); // Use _id property
+
+    // Change the event listener for the form submission
+ // Add the new listener
+ myForm.removeEventListener('submit', onEditSubmit);
+ myForm.addEventListener('submit', onSubmit);
+}
+
+function onEditSubmit(e) {
+    e.preventDefault();
+
+    const editingUser = myForm.getAttribute('data-edit-id');
+    if (editingUser) {
+        const updatedUser = {
+            _id: editingUser,
+            name: name.value,
+            email: email.value
+        };
+
+        axios.put(`https://crudcrud.com/api/d9e68a7401654e82869aefbee2d66afa/appointmentData/${editingUser}`, updatedUser)
+            .then((res) => {
+                console.log(res);
+                updateUserInUI(updatedUser);
+                myForm.removeAttribute('data-edit-id');
+                name.value = '';
+                email.value = '';
+                // Reset the event listener to the original onSubmit function
+                myForm.removeEventListener('submit', onEditSubmit);
+                myForm.addEventListener('submit', onSubmit);
+
+                
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+}
 
 
